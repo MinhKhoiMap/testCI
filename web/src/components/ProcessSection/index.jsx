@@ -27,23 +27,24 @@ const ProcessSection = ({ label, setResultLink }) => {
     setIsLoading(true);
     if (!optionLink) {
       toast.warning("Bạn chưa chọn cấu hình link!");
+      setIsLoading(false);
     } else callApi();
   };
 
   const callApi = async () => {
-    const apiRes = await fetch(
-      `https://api.shrtco.de/v2/shorten?url=${url}/very/long/link.html`
-    );
+    const apiRes = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`);
     const apiData = await apiRes.json();
     setIsLoading(false);
-    console.log(apiData, optionLink);
-    if (optionLink === "shrtco.de") {
-      setResultLink(apiData.result["short_link"]);
-    } else if (optionLink === "9qr.de") {
-      setResultLink(apiData.result["short_link2"]);
-    } else if (optionLink === "shiny.link") {
-      setResultLink(apiData.result["short_link3"]);
-    }
+    // console.log(apiData, optionLink);
+    if (apiData.ok) {
+      if (optionLink === "shrtco.de") {
+        setResultLink(apiData.result["short_link"]);
+      } else if (optionLink === "9qr.de") {
+        setResultLink(apiData.result["short_link2"]);
+      } else if (optionLink === "shiny.link") {
+        setResultLink(apiData.result["short_link3"]);
+      }
+    } else toast.error(apiData.error);
   };
 
   return (

@@ -9,13 +9,14 @@ import {
 } from "react-icons/fa";
 import { ImMail } from "react-icons/im";
 
-const ResultSection = ({ resultLink="/" }) => {
-
-    console.log(resultLink, "ở result link");
+const ResultSection = ({ resultLink = "/" }) => {
+  // console.log(resultLink, "ở result link");
   return (
     <SResultSection>
       <h1>Link generated!</h1>
-      <a href={`${resultLink}`} target="_blank">{resultLink}</a>
+      <a href={`https://${resultLink}`} target="_blank">
+        {resultLink}
+      </a>
       <footer>
         <FaFacebookSquare color="#314986" fontSize="40px" />
         <FaTwitterSquare color="#3B9AE2" fontSize="40px" />
@@ -49,8 +50,8 @@ const SResultSection = styled.section`
   footer {
     margin-top: 20px;
     svg {
-        cursor: pointer;
-        margin: 0 4px;
+      cursor: pointer;
+      margin: 0 4px;
     }
   }
 `;
